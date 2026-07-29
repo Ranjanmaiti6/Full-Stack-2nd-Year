@@ -1,0 +1,31 @@
+*{
+    background-color: rgb(146, 151, 153);
+}
+
+.calu{
+    background-color: rgb(206, 195, 195);
+    margin: 80px;
+}
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button{
+    margin: 7px;
+    background-color: rgb(138, 190, 242);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 2rem;
+}
+#sub{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.display{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(251, 227, 195);
+
+}

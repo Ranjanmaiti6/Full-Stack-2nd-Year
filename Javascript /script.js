@@ -1,40 +1,23 @@
+const display = document.querySelector("#pp");
+const buttons = document.querySelectorAll("button");
 
-// let a = prompt("Enter First No: ");
-// let b = prompt("Enter Second No: ");
-// let ch = prompt("Enter Operator: ");
+let expression = "";
 
-// let ans = 0;
-// if(ch=='+'){
-//     ans = a+b;
-// }
-// else if(ch=='-'){
-//     ans = a-b;
-// }
-// else if(ch=='*'){
-//     ans = a*b;
-// }
-// else if(ch=='/'){
-//     ans = a/b;
-// }
-// else{
-//     alert("Invalid Operation");
-// }
-// alert(`Ans is: ${ans}`)
+buttons.forEach((button) =>{
+    button.addEventListener("click", () => {
+        const value = button.innerText;
 
-
-let btn = document.querySelector('button').value;
-let op = document.getElementById('op').value;
-
-let a,b,op;
-btn.addEventListener('click',(e)=>{
-    a = e.value;
-})
-btn.addEventListener('click' , (e)=>{
-    b = e.value;
-})
-btn.addEventListener('clck', (e)=>{
-    op = e.value;
-})
-
-let ans =a+op+b;
-console.log(ans);
+        if(value === "AC"){
+            expression = "";
+            display.innerText = "0";
+        }
+        else if(value === "="){
+            expression = eval(expression);
+            display.innerText = expression;
+        }
+        else {
+            expression += value;
+            display.innerText = expression;
+        }
+    });
+});

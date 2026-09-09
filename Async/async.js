@@ -42,3 +42,14 @@ fs.readFile('sample.txt' , 'utf8' , (err,data) =>{
         console.log("Update read successfully")
     }
 })
+
+//Delete 
+
+fs.unlink('example.txt' , (err) => {
+    if(err){
+        console.error("Error deleteing file" , err);
+    }
+    else{
+        console.log('\n4, File deleted succssfully')
+    }
+})

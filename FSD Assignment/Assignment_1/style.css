@@ -6,7 +6,7 @@ body{
     width: 80%;
     margin: 50px auto;
     padding: 20px;
-    background-color: rgb(204, 233, 248);
+    background-color: rgb(245, 247, 228);
     text-align: center;
     border-radius: 1rem;
 }
@@ -20,7 +20,7 @@ button{
     margin: 5px;
     cursor: pointer;
     border-radius: 1rem;
-    background-color: rgb(233, 244, 202);
+    background-color: rgb(176, 243, 216);
     border: none;
 }
 #options button{

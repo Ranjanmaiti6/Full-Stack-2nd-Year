@@ -1,28 +1,28 @@
 const questions = [
     {
-        question: "What is HTML?",
-        options: ["Language", "Browser", "Computer", "Game"],
-        answer: "Language"
+        question: "What is my favorite thing to do in free time?",
+        options: ["Coding", "Sleeping", "Gaming", "Travelling"],
+        answer: "Coding"
     },
     {
-        question: "What is CSS used for?",
-        options: ["Styling", "Gaming", "Typing", "Calling"],
-        answer: "Styling"
+        question: "Which time do I usually like to wake up?",
+        options: ["5 AM", "8 AM", "10 AM", "12 PM"],
+        answer: "8 AM"
     },
     {
-        question: "What is JavaScript?",
-        options: ["Language", "Browser", "Website", "Computer"],
-        answer: "Language"
+        question: "Which programming language do I use a lot?",
+        options: ["C++", "Java", "Ruby", "Swift"],
+        answer: "C++"
     },
     {
-        question: "Which tag is used for heading?",
-        options: ["<h1>", "<p>", "<br>", "<img>"],
-        answer: "<h1>"
+        question: "What do I enjoy solving?",
+        options: ["LeetCode", "Crosswords", "Codeforces", "Puzzles"],
+        answer: "LeetCode"
     },
     {
-        question: "Which tag is used for paragraph?",
-        options: ["<p>", "<h1>", "<br>", "<div>"],
-        answer: "<p>"
+        question: "What kind of project do I like building?",
+        options: ["Web Projects", "Cooking Apps", "Music Albums", "Games"],
+        answer: "Web Projects"
     }
 ];
 
@@ -42,80 +42,63 @@ function startQuiz() {
 
     document.getElementById("startPage").style.display = "none";
     document.getElementById("quizPage").style.display = "block";
-
     showQuestion();
 }
+function showQuestion(){
+    let q=questions[questionNo];
+    document.getElementById("questionNumber").innerText="Question "+(questionNo+1);
+    document.getElementById("question").innerText=q.question;
+    document.getElementById("options").innerHTML="";
 
-function showQuestion() {
-    let q = questions[questionNo];
-
-    document.getElementById("questionNumber").innerText =
-        "Question " + (questionNo + 1);
-
-    document.getElementById("question").innerText =
-        q.question;
-
-    let optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML = "";
-    selectedAnswer = null;
-    q.options.forEach(function(option) {
-        let button = document.createElement("button");
-        button.innerText = option;
-        button.onclick = function() {
-            selectAnswer(option, button);
+    q.options.forEach(function(option){
+        let button=document.createElement("button");
+        button.innerText=option;
+        button.onclick=function(){
+            selectAnswer(option,button);
         };
-        optionsDiv.appendChild(button);
-        optionsDiv.appendChild(document.createElement("br"));
-    });
-}
-function selectAnswer(answer, button) {
-    selectedAnswer = answer;
-    let buttons = document.querySelectorAll("#options button");
-
-    buttons.forEach(function(btn) {
-        btn.style.backgroundColor = "";
-        btn.style.color = "";
+        document.getElementById("options").appendChild(button);
+        document.getElementById("options").appendChild(document.createElement("br"));
     });
 
-    button.style.backgroundColor = "green";
-    button.style.color = "white";
+    selectedAnswer=null;
 }
 
-function nextQuestion() {
+function selectAnswer(answer,button){
+    selectedAnswer=answer;
 
-    if (selectedAnswer === null) {
-        alert("Please select an answer first.");
+    let buttons=document.querySelectorAll("#options button");
+    buttons.forEach(function(btn){
+        btn.style.backgroundColor="";
+        btn.style.color="";
+    });
+    button.style.backgroundColor="green";
+    button.style.color="white";
+}
+
+function nextQuestion(){
+    if(selectedAnswer==null){
+        alert("Please select an answer");
         return;
     }
-    if (selectedAnswer === questions[questionNo].answer) {
+    if(selectedAnswer==questions[questionNo].answer){
         marks++;
     }
-
     questionNo++;
-
-    if (questionNo < questions.length) {
+    if(questionNo<questions.length){
         showQuestion();
-    } else {
+    }else{
         submitQuiz();
     }
 }
 
-function submitQuiz() {
-    if (selectedAnswer !== null && questionNo < questions.length) {
-        if (selectedAnswer === questions[questionNo].answer) {
-            marks++;
-        }
-    }
-    let name = document.getElementById("name").value;
-    let roll = document.getElementById("roll").value;
-    let section = document.getElementById("section").value;
+function submitQuiz(){
+    let name=document.getElementById("name").value;
+    let roll=document.getElementById("roll").value;
+    let section=document.getElementById("section").value;
 
-    document.getElementById("quizPage").style.display = "none";
-    document.getElementById("resultPage").style.display = "block";
-    document.getElementById("studentInfo").innerText =
-        "Name: " + name +
-        " | Roll No: " + roll +
-        " | Section: " + section;
-    document.getElementById("score").innerText =
-        "Your Marks: " + marks + " / " + questions.length;
+    document.getElementById("quizPage").style.display="none";
+    document.getElementById("resultPage").style.display="block";
+
+    document.getElementById("studentInfo").innerText="Name: "+name+" | Roll No: "+roll+" | Section: "+section;
+    document.getElementById("score").innerText="Your Marks: "+marks+" / "+questions.length;
 }

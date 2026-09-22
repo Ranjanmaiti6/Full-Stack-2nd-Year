@@ -29,20 +29,39 @@ const questions = [
 let questionNo = 0;
 let marks = 0;
 let selectedAnswer = null;
+let timeLeft = 0.5 * 60;
+let timer;
 
 function startQuiz() {
     let name = document.getElementById("name").value.trim();
     let roll = document.getElementById("roll").value.trim();
     let section = document.getElementById("section").value.trim();
-
     if (name === "" || roll === "" || section === "") {
         alert("Please Enter Valid Details");
         return;
     }
-
     document.getElementById("startPage").style.display = "none";
     document.getElementById("quizPage").style.display = "block";
     showQuestion();
+    startTimer();
+}
+
+function startTimer() {
+    timer = setInterval(function() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById("timer").innerText =
+            "Time Left: " +
+            String(minutes).padStart(2, "0") + ":" +
+            String(seconds).padStart(2, "0");
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert("Time is up!");
+            submitQuiz();
+            return;
+        }
+        timeLeft--;
+    }, 1000);
 }
 function showQuestion(){
     let q=questions[questionNo];
@@ -80,10 +99,13 @@ function nextQuestion(){
         alert("Please select an answer");
         return;
     }
-    if(selectedAnswer==questions[questionNo].answer){
+
+    if(selectedAnswer===questions[questionNo].answer){
         marks++;
     }
+
     questionNo++;
+
     if(questionNo<questions.length){
         showQuestion();
     }else{
@@ -92,6 +114,9 @@ function nextQuestion(){
 }
 
 function submitQuiz(){
+
+    clearInterval(timer);
+
     let name=document.getElementById("name").value;
     let roll=document.getElementById("roll").value;
     let section=document.getElementById("section").value;

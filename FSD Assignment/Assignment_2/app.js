@@ -1,3 +1,4 @@
+const { reverse } = require("dns");
 const EventEmitter = require("events");
 
 const studentActivity = new EventEmitter();
